@@ -1,38 +1,42 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.application'
+//apply plugin: 'com.android.library'
 
-model {
-    android {
-        compileSdkVersion = 25
-        buildToolsVersion = "25.0.1"
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
 
-        defaultConfig.with {
-            applicationId "team.birdhead.rgb2yuv"
-            minSdkVersion.apiLevel = 21
-            targetSdkVersion.apiLevel = 25
-            versionCode = 1
-            versionName = "1.0"
-        }
-        buildTypes {
-            release {
-                minifyEnabled false
-                proguardFiles.add(file('proguard-rules.pro'))
+    defaultConfig.with {
+        applicationId "team.birdhead.rgb2yuv"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled false
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
             }
         }
+
         ndk {
-            moduleName = 'rgb2yuv'
-            toolchain 'clang'
-//            cppFlags.add('-O2')
-            cppFlags.add('-I' + file('src/main/jni/').absolutePath)
-            ldFlags.add('-L' + file('src/main/jniLibs/armeabi-v7a').absolutePath)
-            ldFlags.add('-L' + file('src/main/jniLibs/arm64-v8a').absolutePath)
-            ldLibs.add('yuv')
+//            moduleName = 'rgb2yuv'
+            abiFilters "arm64-v8a", "armeabi-v7a"
         }
-        productFlavors {
-            create('arm') {
-                ndk {
-                    abiFilters.addAll(['armeabi-v7a', 'arm64-v8a'])
-                }
-            }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles.add(file('proguard-rules.pro'))
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/jni/CMakeLists.txt"
+            version "3.10.2"
         }
     }
 }

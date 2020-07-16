@@ -4,12 +4,12 @@ import android.content.Context;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
+//import android.support.v8.renderscript.RenderScript;
 import android.renderscript.Type;
 
 import team.birdhead.rgb2yuv.ScriptC_rgb2yuv;
 
 public class RsConverter implements Converter {
-
     private final RenderScript mRenderScript;
 
     public RsConverter(Context context) {
@@ -23,6 +23,7 @@ public class RsConverter implements Converter {
 
     @Override
     public void rgbToYuv(byte[] rgb, int width, int height, byte[] yuv) {
+
         final Type.Builder inType = new Type.Builder(mRenderScript, Element.RGBA_8888(mRenderScript))
                 .setX(width)
                 .setY(height);

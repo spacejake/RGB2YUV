@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 final ConverterExecutor.Results libYuv = executor.execute(new LibYuvConverter());
                 final ConverterExecutor.Results rs = executor.execute(new RsConverter(getApplicationContext()));
 
-                return java.toString() + "\n" + jni.toString() + "\n" + libYuv.toString() + "\n" + rs.toString();
+                return  java.toString() + "\n"+jni.toString() + "\n" + libYuv.toString() + "\n" + rs.toString();
             }
 
             @Override

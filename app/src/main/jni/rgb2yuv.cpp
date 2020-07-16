@@ -5,10 +5,11 @@ extern "C" {
 
 JNIEXPORT void JNICALL
 Java_team_birdhead_rgb2yuv_converter_JNIConverter_rgbToYuvInternal(JNIEnv *env, jobject,
-                                                                jbyteArray rgbArray, jint width,
-                                                                jint height, jbyteArray yuvArray) {
-    jbyte *rgb = env->GetByteArrayElements(rgbArray, NULL);
-    jbyte *yuv = env->GetByteArrayElements(yuvArray, NULL);
+                              jbyteArray rgbArray, jint width,
+                              jint height, jbyteArray yuvArray) {
+    jboolean isCopy = JNI_FALSE;
+    jbyte *rgb = env->GetByteArrayElements(rgbArray, &isCopy);
+    jbyte *yuv = env->GetByteArrayElements(yuvArray, &isCopy);
 
     int rgbIndex = 0;
     int yIndex = 0;

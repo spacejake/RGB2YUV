@@ -1,5 +1,8 @@
 package team.birdhead.rgb2yuv.converter;
 
+import android.graphics.ImageFormat;
+import android.graphics.YuvImage;
+
 public class JavaConverter implements Converter {
 
     @Override
@@ -31,5 +34,8 @@ public class JavaConverter implements Converter {
                 rgbIndex += 4;
             }
         }
+
+//        YuvImage yuvImg = new YuvImage(rgb, ImageFormat.NV21, width, height, null);
+//        yuv = yuvImg.getYuvData();
     }
 }
